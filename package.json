@@ -1,0 +1,21 @@
+{
+  "name": "ainodeintelligent",
+  "version": "1.0.0",
+  "description": "da",
+  "main": "index.js",
+  "scripts": {
+    "test": "da"
+  },
+  "repository": {
+    "type": "git",
+    "url": "da"
+  },
+  "keywords": [
+    "da"
+  ],
+  "author": "da",
+  "license": "ISC",
+  "dependencies": {
+    "brain.js": "^1.6.1"
+  }
+}
