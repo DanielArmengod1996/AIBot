@@ -16,6 +16,8 @@
   "author": "da",
   "license": "ISC",
   "dependencies": {
-    "brain.js": "^1.6.1"
+    "brain.js": "^1.6.1",
+    "koa": "^2.7.0",
+    "koa-router": "^7.4.0"
   }
 }

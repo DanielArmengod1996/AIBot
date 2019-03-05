@@ -1,14 +1,17 @@
 const brain = require('brain.js');
-const readLine = require('readline');
+const Koa = require('koa');
+const koaRouter = require('koa-router');
+const app = new Koa();
 
+var miBrain = new brain.recurrent.LSTM();
+
+// configuración necesaria para el entrenador de datos
 const config = {
 	binaryThresh : 0.5,
 	hiddenLayers: [3],
 	activation: 'sigmod',
 	leakyReluAlpha: 0.01
 }
-
-var miBrain = new brain.recurrent.LSTM();
 
 // entrenamos a la máquina para que recoga las entradas y salidas que debe de aprender
 miBrain.train([
@@ -19,21 +22,10 @@ miBrain.train([
 	{input : 'Me encuentro mal', output : 'Si te encuentras mal, ves al médico'},
 	{input : 'Estoy contento y alegre', output : 'Me encanta, yo tambien estoy bién'},
 	{input : 'Necesito ayuda', output : 'Soy un chat robot, me puedes preguntar todo lo que quieras, así que adelante.'},
-]);
+], config);
 
-// instanciamos el buffer de entrada de texto, para que el usuario pueda introducir un mensaje
-var rl = readLine.createInterface({
-	input : process.stdin,
-	output: process.stdout
-});
+// podemos lanzar una prueba para ver que funciona correctamente
+var output = miBrain.run(config);
+console.log(output);
 
-
-// se lanza la escucha de el teclado de entrada para recoger la respuesta del usuario
-rl.question('Pregunta: ("s" para salir) ', (answer) => {
-	console.log('Pregunta: ' + answer);
-
-	const respuesta = miBrain.run(answer);
-	console.log('Respuesta: ' + respuesta);
-
-	rl.close();
-});
+// a continuación esta será la parte del front end..
